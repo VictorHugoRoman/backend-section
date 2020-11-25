@@ -1,0 +1,52 @@
+
+Paso 1: Creamos un repositorio en github llamado backend-section
+Paso 2: Hacemos un clone del repositorio
+	git clone https://github.com/VictorHugoRoman/backend-section.git
+Paso 3: Abrir visual studio en la ruta donde hicimos el clone
+	podemos hacer el uso del comando code "nombreRepositorio" (code backend-section) para abrir directamente.
+	Si abrimos la carpeta en VSCode normalmente tenes que hacer uso del comando
+		git init para inicilizar el enlace.
+	Agregar el bash de git en VSCode., en el menu "Terminal" > "New Terminal" > seleccionar la terminal git o bash	
+Paso 4: Crear el package.json de la Aplicacion (API)
+	npm init
+	tenemos que tener nuestra ruta del repositorio git en el campo "git repository" de nuestro package.
+Paso 5: Instalamos las dependencias necesarias (modulos, librerias, framework).
+	npm install express express-async-errors awilix cors compression helmet bcryptjs jsonwebtoken memory-cache mongoose swagger-ui-express
+		-express: framework backend para node.js.
+		-express-async-errors: midlware para controlar las excepciones asincronas.
+		-awilix: Container para hacer inyecciones de dependencias.
+		-cors: para configurar nuestras peticiones q van desde el exterior hasta nuestra API.
+		-compression: ayuda a comprimir las peticiones http.
+		-helmet: aporta seguridad a la API.
+		-bcrypt: para encriptar las contraseñas.
+		-jsonwebtoken: para encriptar token o generar token.
+		-memory-cache: para cachear en memoria aqui entra uno de los principios de RESTful.
+		-mongoose: para nuestra BD no relacional.
+		-swagger-ui-express: para la documentacion de nuestra API.
+Paso 6: Creamos el archivo .gitignore en la carpeta raiz del proyecto.
+	este archivo es de git, nos ayuda no subir o ignorar los archivos o carpetas q queramos  al repositorio.
+	al bajar el proyecto del repositorio el package.json se encarga de recuperar los modulos del proyecto.
+Paso 7: Instalamos las dependencias de desarrollo (development)
+	npm install -D dotenv nodemon mockingoose jest
+		dotenv: para nuestras variables de entorno.
+		nodemon: para nuestro servidor backend, vigila el sistema de archivos y reinicia automáticamente el proceso.
+		mockingoose: para hacer mocking de nuestros tests.
+		jest: framework para nuestros testing.
+Paso 8: Creamos el archivo index.js
+	Sera el entrypoint de nuestra aplicacion.
+Paso 9: Crear los comandos npm en el package.json q dara inicio a nuestra aplicacion
+	comando para produccion: en el objeto del campo Scripts Agregar el sig. valor "start": "node index.js".
+	comando para desarrollo: en el objeto del campo Scripts Agregar el sig. valor "dev": "nodemon index.js".
+Paso 10: Crear la estructura de nuestro proyecto, será de N capas.
+	Crear carpeta tests, para almacenar los test.
+	Crear carpeta src, para nuestro codigo fuente de la aplicacion.
+	Crear carpeta src > controllers
+	Crear carpeta src > models
+	Crear carpeta src > services
+	Crear carpeta src > middlewares, Software q c sitúa en medio d un proceso. Funciona como una capa de traducción oculta 
+		para permitir la comunicación y la administración de datos en aplicaciones distribuidas.
+	Crear carpeta src > repositories, capa de acceso a la BD
+	Crear carpeta src > routes, capa para las rutas o servicios de nuestra API
+	Crear carpeta src > helpers, es una forma de agrupar funciones de uso común, destinadas a servir de ayuda a otros procesos.
+	Crear carpeta src > startup, para almacenar el archivo q tendra la configuracion de este server o API backend.
+Paso 11: crear un archivo index.js a cada capa creada dentro de src.
