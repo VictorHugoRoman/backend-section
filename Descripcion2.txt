@@ -1,0 +1,42 @@
+*** Alimentando la Arquitectura o Estructura del proyecto ***
+
+Paso 1: Creamos el archivo .env
+    para crear las variables de entorno.
+Paso 2: En la carpeta src crear carpeta config
+    crear el archivo index.js para tener la configuracion de nuestro entorno
+Paso 3: Crear un container para la inyeccion de dependencias.
+    lo haremos mediante awilix q lo instalamos como dependencia de produccion.
+    Paso 3.1: Ir a la carpeta startup y crear el archivo container.js
+        en ese archivo configuramos el contenedor de inyeccion de dependencias.
+        ir al paso 4.
+    Paso 3.2: en el archivpo container llamamos el servicio home y registramos o inyectamos el objeto HomeService como una clase.
+        Ir al paso 5.
+Paso 4: Crear un servicio, ir a la capa services. Este servicio nos servirá para crear una entidad de todo e ir probando.
+    crear un archivo nombrado home.service.js.
+    En el archivo index.js exportamos el servicio home.
+    Ir al paso 3.2.
+Paso 5: Ir a la capa controller y crear un controller
+    crear el controlador home.controller.js.
+    ir al index.js y exportamos la clase home controller.
+Paso 6: configuramos o preparamos el home controller para la inyeccion de dependencias, tenemos q ir a awilix es decir al container.js.
+    Hacerle require al HomController y registrarlos en el container como clase.
+Paso 7: Agregar las rutas para enlazar el home controller, ir a routes y agregar los archivos con nombre index.routes.js y home.routes.js.
+Paso 8: Ir a container.js, agregar la ruta que creamos en el paso 7 y registramos en el container(variable) como function.
+        const {HomeRoute} = require("../Routes/index.routes");
+Paso 9: Hasta aqui ya tendriamos nuestras rutas configuradas para ser inyectadas en los constructores d las
+    diferentes funciones q lo requieran.
+Paso 10: Trabajar con el archivo principal de las rutas Routes > index.js
+Paso 11: Ir al container.js y llamar al index.js del paso 10 para inyectar con awilix., y llamar nuestro config > index.js
+    para q las varibales de entorno sean inyectadas donde las necesitemos por inyeccion de dependencias
+Paso 12: Ir al startup > index.js para trabajar en él, es el archivo q contendrá la clase q l dará inicio a nuestra aplicacion.
+    Por el momento crear la clase server y las varibales privadas, exportar la clase server al module.
+Paso 13: Ir al container.js y llamar el startup > index.js para inyectar con awilix como clase.
+Paso 14: Ir al startup > index.js para trabajar con la clase server.
+    Crearemos el metodo para iniciar el servidor.
+Paso 15: Ir al index.js principal de nuestro proyecto, para trabajar con el.
+    aqui vamos a trabajar con  inyeccion de dependencias que tenemos configuradas en el container.js
+Paso 16: Crear middleware para rutas no encontradas. Ir a Middlwares > index.js
+    Crear los archivos not-found.middleware .js y error.middleware.js. Despues los enlazamos al index.js de su ruta (Middlwares > index.js).
+    para mandarlo llamar en Routes > index.js ya q aqui es donde se configuran los middlewares.
+Paso 17. Hacer push de los cambios
+    [ADD] first steps added

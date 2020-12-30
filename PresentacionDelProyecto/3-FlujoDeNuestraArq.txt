@@ -1,0 +1,17 @@
+Aqui describimos la forma de como fluiran las capas
+de nuestra arquitectura(N Capas). (ver imagen FlujoDeNuestraArq.png)
+
+1.- Servidor (API RESTful): es nuestro software.
+2.- Request HHTP GET: una peticion q solicita las ideas disponibles.
+3.- Default middlware: la peticion q llega dispara el middlware q tenemos disponible en el software.
+4.- route: ya q el middlware hizo el proceso accede a la ruta q trae la peticion.
+5.- logic middlware: la ruta o servicio q solicita la peticion puede q aplique middlware por ejemplos una autenticacion de usuario.
+6.- controller: Una vez q la peticion pase por el route y en su defecto por el logic middlware se ejecutará el controlador., estos son
+        los q c encargan de manejar las peticiones http, son los q acceden a los servicios(logica de negocio) del servidor.
+7.- Service: El controller se comunica con algun servicio, aqui se maneja la logica de negocio., Por ejemplo la peticion de un
+        usuario ocupa manejar cierta logica para la informacion q pide., en esta capa se hace, tambien se hace la comunicacion con servicio
+        externo por decir facebook, twitter.
+8.- repository: El servicio ocupa informacion, entonces se comunica con esta capa DE DATOS repository.
+9.- DB: el repository da la informacion de la BD q seleccionamos, este caso Mongo DB.
+
+PODEMOS NOTAR EN LA IMAGEN QUE CADA CAPA SUBSECUENTE TIENE COMUNICACION BIDIRECCIONAL.

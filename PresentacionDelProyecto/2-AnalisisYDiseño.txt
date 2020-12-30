@@ -1,0 +1,14 @@
+
+
+
+Aqui describimos la forma de como o con que vamos a trabajar. (ver imagen AnalisisYDiseño.png)
+
+1.- API RESTful: Identificamos q vamos a crear una API RESTful en Nodejs con el framework express.
+2.- Arq. N Capas: Seleccionamos la Arq de N Capas Adaptada a nuestra necesidades.
+3.- BD No Sql: Escojimos una BD No Sql en este caso usaremos MongoDB como el manejador de BD y el ODM Mongoose.
+4.- Gitflow workflow: para administrar nuestro codigo fuente mediante ramas.
+5.- Autenticacion JWT: para la creación de tokens de acceso que permiten la propagación de identidad y privilegios (claims).
+6.- Unit Testing con Jest: para hacer pruebas de los metodos q iremos creando, combinando con mocking test.
+7.- Documentacion con Swager: para hacer una rapida integracion de la documentacion de nuestros end points.
+
+

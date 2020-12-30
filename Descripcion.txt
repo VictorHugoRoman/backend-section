@@ -1,3 +1,5 @@
+*** Crear la estructura del proyecto *** 
+	La seccion 10 viene con mas conceptos.
 
 Paso 1: Creamos un repositorio en github llamado backend-section
 Paso 2: Hacemos un clone del repositorio
@@ -50,3 +52,6 @@ Paso 10: Crear la estructura de nuestro proyecto, será de N capas.
 	Crear carpeta src > helpers, es una forma de agrupar funciones de uso común, destinadas a servir de ayuda a otros procesos.
 	Crear carpeta src > startup, para almacenar el archivo q tendra la configuracion de este server o API backend.
 Paso 11: crear un archivo index.js a cada capa creada dentro de src.
+Paso 12: Primer push a nuestro repositorio.
+	podemos usar la herramienta de VSCode o la CLI de git.
+
