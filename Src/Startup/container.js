@@ -1,6 +1,8 @@
-//#region 
-    //createContainer: funcion
-    //asValue: metodo para inyectar un objeto como una valor
+//Archivo q funciona como el contenedor de inyeccion de dependencias en este caso usamos awilix
+
+//#region Funcion de las variables 
+    //createContainer: funcion que crea un contenedor y lo retorna
+    //asValue: metodo para inyectar un objeto como un valor
     //asClass: metodo para inyectar un objeto como un clase
     //asFunction: metodo para inyectar un objeto como una funcion
 //#endregion
@@ -19,6 +21,9 @@ const{HomeController} = require("../Controllers");//por default node toma el ind
 //routes
 const {HomeRoutes} = require("../Routes/index.routes");
 const Routes = require('../Routes');//no estructuramos porque simplemente exportamos una funcion
+
+//models
+const {User, Comment, Idea} = require('../Models');//Desestructuración en Javascript.
 
 const container = createContainer();
 
@@ -40,6 +45,10 @@ container.register({//register para la configuracion principal de la aplicacion
 .register({//register para config todas las rutas
     HomeRoutes: asFunction(HomeRoutes).singleton()
     //registramos como funcion ya q eso declaramos en el module.export de home.routes.js
+}).register({
+    User: asValue(User), //usamos asValue para pasarle un valor como tal en este caso de tipo model.User y asi con los demas
+    Idea: asValue(Idea),
+    Comment: asValue(Comment)
 });
 //Se puede meter todo en un metodo register para efectos de segmentacion se me hace mas comodo
 

@@ -1,0 +1,13 @@
+*** Creando los modelos ***
+
+Paso 1: Ir a la carpeta Models.
+    Crear los archivos user.model.js, idea.model.js, comments.model.js para configurar los modelos.
+    Paso 1.1: instalar el paquete mongoose-autopopulate para los schema(modelos), en este caso IdeaSchema(modelo)
+        sirve para hacer llamadas en automatico con las referencia id. como en sql maestro detalle
+    Paso 1.2: Agregar las referencias en el index.js para hacer las llamadas.
+    Paso 1.3: Hacemos la inyeccion de dependencias, agregar en el Startup>container.js las referencias a los modelos, para q pueda ser inyectado como por ejemplo
+        en dependencias de repositorio.
+    Paso 1.4: Configurar un plugin para el autopopulate donde lo iremos a utilizar, en este caso lo usaremos en comment.models.,
+        es buena practica crearlos antes del exports.
+    Paso 1.5: Hacemos un commit
+
