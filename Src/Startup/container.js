@@ -25,6 +25,9 @@ const Routes = require('../Routes');//no estructuramos porque simplemente export
 //models
 const {User, Comment, Idea} = require('../Models');//Desestructuración en Javascript.
 
+//repositories
+const {UserRepository, IdeaRepository, CommentRepository} = require('../Repositories');
+
 const container = createContainer();
 
 //inyectamos el objeto HomService como una clase al contenedor
@@ -49,7 +52,12 @@ container.register({//register para la configuracion principal de la aplicacion
     User: asValue(User), //usamos asValue para pasarle un valor como tal en este caso de tipo model.User y asi con los demas
     Idea: asValue(Idea),
     Comment: asValue(Comment)
-});
+}). register({
+    UserRepository: asClass(UserRepository).singleton(),
+    IdeaRepository: asClass(IdeaRepository).singleton(),
+    CommentRepository: asClass(CommentRepository).singleton()
+})
+;
 //Se puede meter todo en un metodo register para efectos de segmentacion se me hace mas comodo
 
 module.exports = container;

@@ -1,0 +1,11 @@
+*** Creando los repositorios ***
+
+Paso 1: Ir a la carpeta Repositories.
+    Crear los archivos archivos base.repository.js, user.repository.js, idea.repository.js, comment.repository.js
+    Paso 1.1: Nos vamos al index de la capa Repositories (index.js) y agregamos los repository, 
+                 user (user.repository.js), idea (idea.repository.js), comment (comment.repository.js)
+Paso 2: Agregar al Container para la inyeccion de dependencias
+        Ir a startup > container.js y hacemos una destructuracion de objetos con los Repositories agregados en el index en su respectiva capa.
+Paso 3: Corregimos el warning de la conexion de mongo.
+        Ir al index.js principal de la app y en la conexion a mongo pasarle la opcion q nos sugeria el warning "useUnifiedTopology: true"
+Paso 4: Hacer Commit.
