@@ -9,8 +9,8 @@ class UserRepository extends BaseRepository{
         _user=User;
     }
     
-    async getUserByUserName(userName){
-        return await _user.findOne({userName});
+    async GetUserByUserName(userName){
+        return await _user.findOne({userName});//findOne metodos de mongoose 
     }
 }
 

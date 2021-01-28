@@ -7,8 +7,8 @@ class IdeaRepository extends BaseRepository {
         _idea = Idea;
     }
     //metodo adicional para obtener las ideas por author
-    async getUserIdeas(author) {
-        return await _idea.find({author});
+    async GetUserIdeas(author) {
+        return await _idea.find({author});//find Metodos de Mongoose
     }
 }
 module.exports = IdeaRepository;

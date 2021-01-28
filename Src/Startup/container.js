@@ -9,7 +9,7 @@
 const {createContainer, asClass, asValue, asFunction} = require("awilix");
 
 //services
-const {HomeService} = require("../Services");//por default node toma el index.js
+const {HomeService, UserService, IdeaService, CommentService} = require("../Services");//por default node toma el index.js
 
 //config
 const config = require("../Config");
@@ -38,7 +38,10 @@ container.register({//register para la configuracion principal de la aplicacion
     config: asValue(config) //pasamos com un objeto
 })
 .register({//register para config todos los servicios
-    HomeService: asClass(HomeService).singleton()
+    HomeService: asClass(HomeService).singleton(),
+    UserService: asClass(UserService).singleton(),
+    IdeaService: asClass(IdeaService).singleton(),
+    CommentService: asClass(CommentService).singleton()
 })
 .register({//register para config todos los controllers
     HomeController: asClass(HomeController.bind(HomeController)).singleton() 

@@ -4,19 +4,19 @@ class BaseRepository{
     constructor(model){
         this.model = model;//model sera un modelo de los q creamos pero tendra el contexto de mongoose en tiempo de ejecucuion
     }
-    async get(id){
+    async Get(id){
         return await this.model.findById(id); //findById metodo de mongoose 
     }
-    async getAll(){
+    async GetAll(){
         return await this.model.find();
     }
-    async create(entity){
+    async Create(entity){
         return await this.model.create(entity);
     }
-    async update(id, entity){
-        return await  this.model.findByIdAndUpdate(id, entity, {new: true});//con new = true le decimos a mongo q nos retorne la entidad q a sido actualizada con los cambios
+    async Update(id, entity){
+        return await this.model.findByIdAndUpdate(id, entity, {new: true});//con new = true le decimos a mongo q nos retorne la entidad q a sido actualizada con los cambios
     }
-    async delete(id){
+    async Delete(id){
         return await this.model.findByIdAndDelete(id);
     }
 }
