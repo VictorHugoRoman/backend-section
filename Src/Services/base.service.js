@@ -1,11 +1,10 @@
 //Es el servicio del cual las demas clases heredarán para tener un CRUD disponible
-class BaseService{
-    constructor(repository){//los repository creados anteriormente idea, user, comment
+class BaseService {
+    constructor(repository) {//los repository creados anteriormente idea, user, comment
         this.repository = repository;
     }
-    async Get(id) 
-    {
-        if(!id){
+    async Get(id) {
+        if (!id) {
             const error = new Error();
             error.status = 400;
             error.message = "id must be sent";
@@ -20,14 +19,14 @@ class BaseService{
         }
         return currentEntity;
     }
-    async GetAll(){ 
+    async GetAll() {
         return await this.repository.GetAll();
     }
-    async Create(entity){
+    async Create(entity) {
         return await this.repository.Create(entity);
     }
-    async Update(id, entity){
-        if(!id){
+    async Update(id, entity) {
+        if (!id) {
             const error = new Error();
             error.status = 400;
             error.message = "id must be sent";
@@ -36,8 +35,8 @@ class BaseService{
         //como el metodo update del baseRepository si lo encuentra lo actualiza si no arroja un mensaje y no un error por lo tanto se lo dejamos al metodo q lance el error
         return await this.repository.Update(id, entity);
     }
-    async Delete (id){
-        if(!id){
+    async Delete(id) {
+        if (!id) {
             const error = new Error();
             error.status = 400;
             error.message = "id must be sent";

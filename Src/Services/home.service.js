@@ -1,7 +1,7 @@
 const { model } = require("mongoose");
 
 class HomeService {
-    index(){
+    index() {
         return {
             message: "Hello Mundo!"
         };

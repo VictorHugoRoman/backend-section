@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const { schema } = require('./user.model');
 const Schema = mongoose.Schema;
 
-const IdeaSchema = new Schema({    
-    idea: {type: String, required:true},
-    description: {type: String},
-    upvotes: [{type: Boolean}],
-    downvotes: [{type: Boolean}],
+const IdeaSchema = new Schema({
+    idea: { type: String, required: true },
+    description: { type: String },
+    upvotes: [{ type: Boolean }],
+    downvotes: [{ type: Boolean }],
     author: { //relacion con nuestro modelo user
-        type: Schema.Types.ObjectId, 
+        type: Schema.Types.ObjectId,
         ref: "user",//relacion con nuestro modelo user.model
-        required: true, 
+        required: true,
         autopopulate: true //cada vez q busquemos una idea nos arroje la info de su autor, necesario paquete mongoose-autopopulate
     },
     comments: [
@@ -18,7 +18,7 @@ const IdeaSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "comment",//relacion con nuestro modelo comments.model
             required: true,
-            autopopulate:true
+            autopopulate: true
         }
     ]
 });

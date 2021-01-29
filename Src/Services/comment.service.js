@@ -1,14 +1,14 @@
 const BaseService = require('./base.service');
 let _commentRepository = null, _ideaRepository = null;
 
-class CommentService extends BaseService{
-    constructor({CommentRepository, IdeaRepository}){
+class CommentService extends BaseService {
+    constructor({ CommentRepository, IdeaRepository }) {
         super(CommentRepository);//le pasamos el CommentRepository al constructor padre de la clase q estamos creando 
-        _commentRepository = CommentRepository ;
+        _commentRepository = CommentRepository;
         _ideaRepository = IdeaRepository;
     }
     //Obtiene comentarios por idea
-    async GetIdeaComments(ideaId){
+    async GetIdeaComments(ideaId) {
         if (!ideaId) {
             const error = new Error(); //Podemos crear un clase BadRequest que herede de la clase Error en Helpers para no repetir este mmismo codigo de error
             error.status = 400;
@@ -22,7 +22,7 @@ class CommentService extends BaseService{
             error.message = "idea does not exist";
             throw error;
         }
-        const {comments} = idea;//destructuramos los commentarios de la idea(modelo), commments es una propiedad
+        const { comments } = idea;//destructuramos los commentarios de la idea(modelo), commments es una propiedad
         return comments;
     }
     //Crea comentarios por idea
@@ -42,7 +42,7 @@ class CommentService extends BaseService{
         }
         const createdComment = await _commentRepository.create(comment);//_commentRepository extiende de mongo entonces usamos el metodo crear el modelo de tipo comments
         idea.comments.push(createdComment);
-        return await _ideaRepository.update(ideaId, {comments:idea.comments});//_ideaRepository extiende de mongo entonces usamos el metodos update para acutalizar el comments en la idea
+        return await _ideaRepository.update(ideaId, { comments: idea.comments });//_ideaRepository extiende de mongo entonces usamos el metodos update para acutalizar el comments en la idea
     }
 }
 module.exports = CommentService;

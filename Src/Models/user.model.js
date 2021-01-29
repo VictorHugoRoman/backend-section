@@ -1,13 +1,13 @@
 //1.- Llamamos al objeto mongoose 
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 //2.-llamar al paquete bcrypt q instalamos, para las criptacciones
-const {compareSync, hashSync, genSaltSync} = require('bcryptjs');  
+const { compareSync, hashSync, genSaltSync } = require('bcryptjs');
 //3.-Creamos el modelo con la clase Schema de mongoose
 const UserSchema = new Schema({
-    name: {type: String, required:true},
-    username: {type: String, required:true},
-    password: {type: String, required:true}
+    name: { type: String, required: true },
+    username: { type: String, required: true },
+    password: { type: String, required: true }
 });
 
 //4.-Agregamos el metodo ToJSON, Quitamos la propiedad password al momento d q el usuario lea el documento o modelo en cuestion
@@ -24,12 +24,12 @@ UserSchema.methods.ComparePasswords = function (password) {
 
 //6.- Aplicamos unos hooks de mongoose antes de exportar el modelo, funciona como middlewares
 //6.1.- funcion pre, con este metodo hacemos q antes de q c guarde este documento o modelo se ejecute la funcion q le pasamos
-UserSchema.pre('save', async function(next){
+UserSchema.pre('save', async function (next) {
     const user = this;//podemos hacer referencia al modelo q c esta por guardarse gracias a la funcion callback configurada q le pasamos.
-    if(!user.isModified) 
+    if (!user.isModified)
         return next();//metodo next de mongoose, finaliza esta funcion y pasa a las sig. implementaciones, es como un continue
     const salt = genSaltSync(10);//fragmento aleatorio que se usará para generar el hash asociado a la password
-    const hashedPassword  = hashSync(user.password, salt); //generamos el has del password
+    const hashedPassword = hashSync(user.password, salt); //generamos el has del password
     user.password = hashedPassword;
     next();//metodo next de mongoose, finaliza esta funcion y pasa a las sig. implementaciones, es como un continue
 });

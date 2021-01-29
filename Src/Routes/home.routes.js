@@ -1,14 +1,13 @@
 //Aqui van las rutas que estaran configuradas en nuestro home
 
-const {Router} = require("express"); //Usamos el Router de express
+const { Router } = require("express"); //Usamos el Router de express
 
 //#region 
 //function(){} es como el constructor en una clase, ya q las clases en javascritp son funciones
 //Es como si crearamos una clase anonima con un constructor de por medio
 //#endregion
 //le pasamos al constuctor nuestro HomeController q configuramos con awilix por lo tanto awilix s l encargado de pasarle el valor
-module.exports = function({HomeController}) 
-{ 
+module.exports = function ({ HomeController }) {
     const router = Router();
 
     //#region 
