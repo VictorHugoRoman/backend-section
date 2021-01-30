@@ -1,4 +1,5 @@
 //Es el servicio del cual las demas clases heredarán para tener un CRUD disponible
+
 class BaseService {
     constructor(repository) {//los repository creados anteriormente idea, user, comment
         this.repository = repository;
@@ -10,7 +11,7 @@ class BaseService {
             error.message = "id must be sent";
             throw error; //este error lo cachara el middleware error.middleware.js
         }
-        const currentEntity = await this.repository.get(id);//buscamos  la entidad
+        const currentEntity = await this.repository.Get(id);//buscamos  la entidad
         if (!currentEntity) {
             const error = new Error();
             error.status = 404;

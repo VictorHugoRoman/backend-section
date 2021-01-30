@@ -8,7 +8,7 @@ class HomeController {
     }
 
     //express se encarga de pasarle valor a req y res.
-    index(req, res) {
+    Index(req, res) {
         return res.send(_homeService.index()); //index() pertenece a la clase HomeService de home.service.js
     }
 }

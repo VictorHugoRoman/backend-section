@@ -1,3 +1,5 @@
+//Aqui van los controllers disponibles para el modelo Idea,  usa la capa Services
+
 let _ideaService = null;
 class IdeaController {
     constructor({ IdeaService }) {//por inyeccion de dependencia recibimos IdeaService de la capa servicios

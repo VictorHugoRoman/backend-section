@@ -1,3 +1,4 @@
+//Aqui van los Repository disponibles para el modelo user, Usa la capa Models
 
 const BaseRepository = require('./base.repository');
 let _user = null; //variable privada para este scoupe o contexto

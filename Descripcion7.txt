@@ -1,0 +1,21 @@
+*** Creando las rutas***        
+        Esta capa se comunica con la capa controller.
+        
+Paso 1: Ir a la carpeta Routes.
+    Crear los archivos user.routes.js, idea.routes.js, comment.routes.js.
+    Paso 1.1: Nos vamos al index de la capa Routes (index.routes.js) y agregamos los Routes, 
+                user (user.routes.js), idea (idea.routes.js), comment (comment.routes.js)
+Paso 2: Agregar al Container para la inyeccion de dependencias
+        Ir a startup > container.js y hacemos una destructuracion de objetos con los Routes agregados en el index en su respectiva capa.,
+        En este caso ya teniamos el route HomeRoutes asi que hacemos la destructuracion ahi mismo y hacemos el register junto al HomeRoutes.
+Paso 3: Una vez configuradas las rutas en el container de dependencias, tenemos que configurarlas en el index de la capa de rutas (Routes > index.js) 
+        En la funcion anonimas q estamos exportando le mandamos como parametro un objeto el cual contendra nuestras rutas que configuramos en en el container
+        es decir q los valores los pasara awilix por inyeccion de dependencias, entonces colocamos las rutas en ese parametro de tipo objeto, previamente teniamos
+        el HomeRoutes.
+Paso 4: Probamos las rutas http://localhost:5000/v1/api/user , idea 
+Paso 5: Debuggear con el icono del bicho, en esa seccion buscar el icono de engrane(ajuste) y saldra el archivo launch.json y quitamos 
+        la propiedad skipFiles, presionamos f5 y corre en modo debug.
+Paso 3: Corregimos el warning de la conexion de mongo.(Se hizo en la Descripcion 4)
+        Ir al index.js principal de la app y en la conexion a mongo pasarle la opcion q nos sugeria el warning "useUnifiedTopology: true"
+Paso 4: Hacer Commit.
+

@@ -1,3 +1,5 @@
+//Aqui van los serivicos disponibles para el modelo Idea, usa la capa Repositories
+
 const BaseService = require('./base.service');
 let _ideaRepository = null;
 

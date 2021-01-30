@@ -1,3 +1,5 @@
+//Aqui van los serivicos disponibles para el modelo Comment, usa la capa Repositories
+
 const BaseService = require('./base.service');
 let _commentRepository = null, _ideaRepository = null;
 

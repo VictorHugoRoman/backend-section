@@ -19,8 +19,8 @@ const app = require('.'); //es lo mismo q require('./index');
 const { HomeController, UserController, IdeaController, CommentController } = require("../Controllers");//por default node toma el index.js
 
 //routes
-const { HomeRoutes } = require("../Routes/index.routes");
-const Routes = require('../Routes');//no estructuramos porque simplemente exportamos una funcion
+const { HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes } = require("../Routes/index.routes");
+const Routes = require('../Routes');//no deestructuramos porque simplemente exportamos una funcion
 
 //models
 const { User, Comment, Idea } = require('../Models');//Desestructuración en Javascript.
@@ -52,8 +52,10 @@ container.register({//register para la configuracion principal de la aplicacion
         CommentController: asClass(CommentController.bind(CommentController)).singleton()
     })
     .register({//register para config todas las rutas
-        HomeRoutes: asFunction(HomeRoutes).singleton()
-        //registramos como funcion ya q eso declaramos en el module.export de home.routes.js
+        HomeRoutes: asFunction(HomeRoutes).singleton(), //registramos como funcion ya q eso declaramos en el module.export de home.routes.js
+        UserRoutes: asFunction(UserRoutes).singleton(),
+        IdeaRoutes: asFunction(IdeaRoutes).singleton(),
+        CommentRoutes: asFunction(CommentRoutes).singleton()
     }).register({
         User: asValue(User), //usamos asValue para pasarle un valor como tal en este caso de tipo model.User y asi con los demas
         Idea: asValue(Idea),

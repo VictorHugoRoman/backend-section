@@ -1,3 +1,5 @@
+//Aqui van los controllers disponibles para el modelo Comment,  usa la capa Services
+
 let _commentService = null;
 class CommentController {
     constructor({ CommentService }) {//por inyeccion de dependencia recibimos CommentService de la capa servicios
@@ -32,7 +34,7 @@ class CommentController {
         return res.send(deleteComment);
     }
     //Obtener comentarios por idea
-    async GetIdeasComments(req, res) {
+    async GetIdeaComments(req, res) {
         const { ideaId } = req.params;
         const comments = await _commentService.GetIdeasComments(ideaId);
         return res.send(comments);

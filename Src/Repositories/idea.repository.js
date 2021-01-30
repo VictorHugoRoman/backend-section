@@ -1,8 +1,9 @@
+//Aqui van los Repository disponibles para el modelo Idea, Usa la capa Models
 
 const BaseRepository = require('./base.repository');
 let _idea = null;
 class IdeaRepository extends BaseRepository {
-    constructor(Idea) {
+    constructor({ Idea }) {
         super(Idea);
         _idea = Idea;
     }

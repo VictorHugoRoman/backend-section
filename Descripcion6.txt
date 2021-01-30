@@ -1,4 +1,5 @@
 *** Creando los Controllers ***
+        Esta capa se comunica con la capa Services.
         plus: Buscar como crear un BaseController como la capa de servicios y repositorios se creo una clase base,
                 en el curso se menciona que se pierde el contexto o scoupe de express al crear esa clase base y para
                 no profundizar tanto o perder el enfoque en el curso no se implementó.
@@ -9,7 +10,7 @@ Paso 1: Ir a la carpeta Controllers.
                 user (user.controller.js), idea (idea.controller.js), comment (comment.controller.js)
 Paso 2: Agregar al Container para la inyeccion de dependencias
         Ir a startup > container.js y hacemos una destructuracion de objetos con los Controllers agregados en el index en su respectiva capa.,
-        En este caso ya teniamos el servicio HomeController asi que hacemos la destructuracion ahi mismo y hacemos el register en el HomeController.
+        En este caso ya teniamos el controller HomeController asi que hacemos la destructuracion ahi mismo y hacemos el register en el HomeController.
 Paso 3: Corregimos el warning de la conexion de mongo.(Se hizo en la Descripcion 4)
         Ir al index.js principal de la app y en la conexion a mongo pasarle la opcion q nos sugeria el warning "useUnifiedTopology: true"
 Paso 4: Hacer Commit.

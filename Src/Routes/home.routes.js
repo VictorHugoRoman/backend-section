@@ -1,4 +1,4 @@
-//Aqui van las rutas que estaran configuradas en nuestro home
+//Aqui van las rutas que estaran disponible para el Home,  usa la capa Controllers
 
 const { Router } = require("express"); //Usamos el Router de express
 
@@ -14,11 +14,11 @@ module.exports = function ({ HomeController }) {
     //get() corresponde a una peticion http de tipo get
     //Param 1: ruta URI. Param 2: controlador o metodo del controlador q resolverá la ruta pasada en el param 1
     //#endregion
-    router.get("/", HomeController.index);//HomeController.index es la funcion q express ejecutara por ello la pasamos de esa manera y no HomeController.index() porque asi se ejecutaria la funcion
+    router.get("/", HomeController.Index);//HomeController.index es la funcion q express ejecutara por ello la pasamos de esa manera y no HomeController.index() porque asi se ejecutaria la funcion
     //#region 
     //Normalmente cuando express ejecuta el get o cualquier otra funcion del Router le pasa su scope a la funcion
     //pero como a nuestro controller home le hicimos un bind en nuestro container.js el scope o contexto seguirá 
-    //perteneciendo al controller y asi podremos acceder a sus servicios o metodos.
+    //perteneciendo al controller en este caso HomeController y asi podremos acceder a sus servicios o metodos.
     //#endregion
     return router;
 }

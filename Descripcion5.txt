@@ -1,5 +1,6 @@
 *** Creando los Servicios ***
-
+        Esta capa se comunica con la capa de Repositories
+        
 Paso 1: Ir a la carpeta Services.
     Crear los archivos base.service.js, user.service.js, idea.service.js y comment.service.js.
     Paso 1.1: Nos vamos al index de la capa Services (index.js) y agregamos los servicios, 
