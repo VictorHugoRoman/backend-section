@@ -9,18 +9,19 @@
 const { createContainer, asClass, asValue, asFunction } = require("awilix");
 
 //services
-const { HomeService, UserService, IdeaService, CommentService } = require("../Services");//por default node toma el index.js
+const { HomeService, UserService, IdeaService, CommentService, AuthService } = require("../Services");//por default node toma el index.js
 
+//Variables para el inicio del servidor
 //config
 const config = require("../Config");
-const app = require('.'); //es lo mismo q require('./index');
+const app = require('.'); //es lo mismo q require('./index');, es el index.js de esta capa StartUp
 
 //controller
-const { HomeController, UserController, IdeaController, CommentController } = require("../Controllers");//por default node toma el index.js
+const { HomeController, UserController, IdeaController, CommentController, AuthController } = require("../Controllers");//por default node toma el index.js
 
 //routes
-const { HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes } = require("../Routes/index.routes");
-const Routes = require('../Routes');//no deestructuramos porque simplemente exportamos una funcion
+const { HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes, AuthRoutes } = require("../Routes/index.routes");
+const Routes = require('../Routes');//no destructuramos porque simplemente exportamos una funcion
 
 //models
 const { User, Comment, Idea } = require('../Models');//Desestructuración en Javascript.
@@ -28,20 +29,22 @@ const { User, Comment, Idea } = require('../Models');//Desestructuración en Jav
 //repositories
 const { UserRepository, IdeaRepository, CommentRepository } = require('../Repositories');
 
+//Este container lo consume el index.js(root) principal de la apliacion
 const container = createContainer();
 
-//inyectamos el objeto HomService como una clase al contenedor
-//register(): le mandamos un objeto con el key HomeService y la inyeccion del objeto como una clase en modo singleton para tener la misma instancia
+
+//register({}): le mandamos un objeto con los key app, router, config para la inyeccion del objeto como una clase en modo singleton para tener la misma instancia
 container.register({//register para la configuracion principal de la aplicacion
     app: asClass(app).singleton(),
     router: asFunction(Routes).singleton(),
     config: asValue(config) //pasamos com un objeto
-})
+})      //register({}): le mandamos un objeto con el key HomeService, etc y la inyeccion del objeto como una clase en modo singleton para tener la misma instancia
     .register({//register para config todos los servicios
-        HomeService: asClass(HomeService).singleton(),
+        HomeService: asClass(HomeService).singleton(), //inyectamos el objeto HomService como una clase al contenedor
         UserService: asClass(UserService).singleton(),
         IdeaService: asClass(IdeaService).singleton(),
-        CommentService: asClass(CommentService).singleton()
+        CommentService: asClass(CommentService).singleton(),
+        AuthService: asClass(AuthService).singleton()
     })
     .register({//register para config todos los controllers
         HomeController: asClass(HomeController.bind(HomeController)).singleton(),
@@ -49,13 +52,15 @@ container.register({//register para la configuracion principal de la aplicacion
             cuando mande llamar a HomeController, es decir, se mantendra el contexto del controller Home.*/
         UserController: asClass(UserController.bind(UserController)).singleton(),
         IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
-        CommentController: asClass(CommentController.bind(CommentController)).singleton()
+        CommentController: asClass(CommentController.bind(CommentController)).singleton(),
+        AuthController: asClass(AuthController.bind(AuthController)).singleton()
     })
     .register({//register para config todas las rutas
         HomeRoutes: asFunction(HomeRoutes).singleton(), //registramos como funcion ya q eso declaramos en el module.export de home.routes.js
         UserRoutes: asFunction(UserRoutes).singleton(),
         IdeaRoutes: asFunction(IdeaRoutes).singleton(),
-        CommentRoutes: asFunction(CommentRoutes).singleton()
+        CommentRoutes: asFunction(CommentRoutes).singleton(),
+        AuthRoutes: asFunction(AuthRoutes).singleton()
     }).register({
         User: asValue(User), //usamos asValue para pasarle un valor como tal en este caso de tipo model.User y asi con los demas
         Idea: asValue(Idea),

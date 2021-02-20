@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 //2.-llamar al paquete bcrypt q instalamos, para las criptacciones
 const { compareSync, hashSync, genSaltSync } = require('bcryptjs');
-//3.-Creamos el modelo con la clase Schema de mongoose
+//3.-Creamos el modelo user con la clase Schema de mongoose
 const UserSchema = new Schema({
     name: { type: String, required: true },
     username: { type: String, required: true },

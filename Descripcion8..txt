@@ -1,0 +1,46 @@
+*** Creando Autenticacion Token JWT***
+        Recordar q el backend q estamos construyendo es basado en RestFul y uno de los principios de RestFul s q s stateless, es decir, q no
+        tiene estados, entonces a traves de un token es la forma n q nuestro backend puede identificar quien es q l esta haciendo dicho request
+        y sobre todo saber si tiene permiso para acceder a un recurso o no.
+        
+Paso 1: Ir a la carpeta Helpers, se creará un helper para generar los tokens(jwt tokens) de nuestra aplicacion.
+        Haremos uso del package jsonWebToken jwt.
+    Crear los archivos jwt.helper.js
+Paso 1.1: Crear una clave secreta para el token.
+        Ir al archivo de las variables de entorno (.env) y creamos una con el nombre de JWT_SECRET y le pasamos el secret key,
+        Despues ir al archivo de Configuracion (Config > index.js) para exporta la variable de entorno q recien creamos,
+        Ahora extraemos esa variable en nuestro archivo jwt recien creado.
+Paso 2: Una vez terminada y exportada la funcion que creara los tokens exportamos el helper jwt (Helpers > jwt.helper.js) en el index de la capa helper (Helpers > index.js).
+Paso 3: Crear el servicio de autenticacion.
+        Ir a Services y crear el archivo auth.service.js
+        3.1: Ir al index de esta capa y y exportar el auth.service.js.
+        3.2 Ir al container y llamar el auth.service donde tenemos los servicios.
+Paso 4: Crear el controller auth.controller.js
+        4.1. Pasar el controlador recien creado al index d su capa.
+        4.2. Pasar el controlador a awilix en la seccion controller para la inyeccion de dependencias
+Paso 5: Crear las rutas de autenticacion, Ir a la capa routes y crear el archivo auth.routes.js.
+        5.1 Agregar al index de su capa para q este disponible el archivo creado.
+        5.2 Pasar el archivo routes a awilix en la seccion Routes para la inyeccion de dependencias.
+        5.2 Agregar la clase del archivo recien creado al router (index.js).
+Paso 6: Crear un middleware para la validacion de autenticacion, para saber si esta o no autenticado el usuario.
+                Ir a Middlewares y crear el archivo auth.middleware.js   
+        6.1 . Probar el middleware recien creado. 
+                Ir a user.routes.js e importar el middleware y protegemos la ruta q obtiene todos los usuarios.
+Paso 7: Probar el token desde el cliente. Vamos a probar la ruta q obtiene todos los usuarios ya q ahi implementamos el middleware con el token.
+        7.1 Dar de alta un cliente, ruta: http://localhost:5000/v1/api/auth/signup
+        7.2 Obtener un token, ruta: http://localhost:5000/v1/api/auth/signin
+        7.3 Ejecutar la URL que obtiene todos los usuarios con token y sin él, para ejecutar con token ocupamos agregar la propiedad Authorization
+                en el Header de la peticion y agregarle el valor token. Podemos probar tambien enviando un token falso.
+Paso 8: Hacer Commit.
+        Nota: enviamos los cambios .env por ser un curso pero en un proyecto real no debe enviarse por seguridad, 
+                para esto lo ignoramos en nuestro .gitignore
+
+
+
+Comentarios:
+-Git: el comando Undo Last Commit te regresa el ultimo commit que hiciste.
+-Solo un pequeño dato que espero les sirva, se puede evitar escribir node_modules/.bin/sequelize utilizando el comando npx que es propio de npm.
+        Ej. npx sequelize [comando] o explicitamente "npx sequelize init"
+        npx se encarga de buscar por nosotros en la carpeta de node_modules.
+-Dot notation: car.seats -> "cloth"
+-Bracket notation: car["seats"] -> "cloth"

@@ -1,3 +1,4 @@
+//Aqui van los controllers disponibles para el modelo User,  usa la capa Services
 let _userService = null;
 class UserController {
     constructor({ UserService }) {//por inyeccion de dependencia recibimos UserService de la capa servicios
