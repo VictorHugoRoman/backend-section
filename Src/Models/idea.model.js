@@ -16,7 +16,7 @@ const IdeaSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: "comment",//relacion con nuestro modelo comments.model
-            required: true,
+            required: false,
             autopopulate: true
         }
     ]
