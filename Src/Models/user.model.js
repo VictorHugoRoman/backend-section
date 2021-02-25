@@ -11,7 +11,7 @@ const UserSchema = new Schema({
 });
 
 //4.-Agregamos el metodo ToJSON, Quitamos la propiedad password al momento d q el usuario lea el documento o modelo en cuestion
-UserSchema.methods.ToJSON = function () {
+UserSchema.methods.toJSON = function () {
     let user = this.toObject();
     delete user.password;
     return user;
