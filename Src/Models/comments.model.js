@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
 const CommentSchema = new Schema({
     comment: { type: String, required: true },
@@ -11,7 +11,6 @@ const CommentSchema = new Schema({
         autopopulate: true
     }
 });
-
 //configurando el autopopulate de mongoose con el paquete q instalamos
 CommentSchema.plugin(require('mongoose-autopopulate'));
 
