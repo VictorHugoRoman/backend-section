@@ -5,13 +5,14 @@ const { JWT_SECRET } = require('../Config');//llamaos el secrete key para poder 
 
 //next le da continuacion al proximo middlware d la cadena de middlwares de express
 module.exports = function (req, res, next) {
-    const token = req.headers["authorization"]; //buscamos el tokent en el request con bracket notation
+    const token = req.headers["authorization"]; //buscamos el token en el request con bracket notation
     if (!token) {
         const error = new Error();
         error.message = "Token must be sent";
         error.status = 400;
         throw error;
     }
+    //function (error, decodeToken) es un callaback q le pasa valor a los argumentos error y decodeToken
     jwt.verify(token, JWT_SECRET, function (error, decodeToken) {
         if (error) {
             error.message = "Invalid Token";

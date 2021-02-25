@@ -1,4 +1,5 @@
-//Es una funcion q c va a exportar, pero esta funcion necesitará la ayuda de nuestro paquete JsonWebToken.
+//Agregamos una propiedad al objeto exports de node y esta contendra la funcion, 
+//pero esta funcion necesitará la ayuda de nuestro paquete JsonWebToken.
 
 const { sign } = require("jsonwebtoken"); //extraemos el metodo sign, q sirve para firmar los tokens.
 const { JWT_SECRET } = require('../Config'); //extraemos el secret key de nuestro token
@@ -13,3 +14,7 @@ module.exports.generateToken = function (user) {
     return sign({ user }, JWT_SECRET, { expiresIn: "4h" });
     //sign lo q hace es retornar un token con jwt_secret dependiendo lo grande q sea el usuario, es decir si el user tiene un nombre el token sera muy pequeño.
 };
+
+//Recordar q nuestro backend es un RestFul y uno de los principios de esta es q trabaja sin estados (stateless)
+//por ello a travez de tokens nuestro backend puede identificar quien es quien está haciendo dicho request y sobre todo
+//sbaer si tiene permiso para acceder a un recurso o no.

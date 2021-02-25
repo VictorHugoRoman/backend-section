@@ -1,0 +1,37 @@
+*** Creando la Paginacion de los recursos de la API***
+        
+        
+Paso 1: Ir a la carpeta Middlewares, Implementar un casteo de querys string numericos a numericos como tal.
+        esto pasa porque nodeJs en las Apis los querys viajan como si fueran de tipo string, y nosotros ocupamos tipos numericos para los metodos de mongoose.
+        Crear el archivo parse-int.middleware.js
+Paso 2: Modificar el base.repository.js en el metodo GetAll()
+        Implementar la paginacion q por defecto retorne la primera pagina y con 5 elementos, para ello le asignamos valor default a los argumentos del metodo
+Paso 3: Modificar el base.service.js en el metodo GetAll()
+        pasarle los argumentos pageNum(pagina a ver) y pageSize(regisstros a ver en la pagina).
+        Con este ya tenemos el servicio configurado con paginacion para hacer una peticion.
+Paso 4: Probar el servicio de paginacion, lo haremos con los usuarios.
+        4.1 Ir a user.controller e idea.controller. Mandarle los parametros pageNum y pageSize
+        4.2 Ir a User.routes e Idea.routes. Asignar el middleware parse-int.middleware.js que creamos en el paso 1.
+Paso 5: Hacer request a la paginacion.
+        5.1 (request Usuarios)
+                5.1.1 Primero tenemos q asignar mas usuarios con el metodo signUp y despues ingresar con algun usuario con el metodo signIn.
+                5.1.2 Obtener todos los usuarios, http://localhost:5000/v1/api/user . nos retorna la paginacion default en el metodo.
+                5.1.3 Obtenter 7 registros, http://localhost:5000/v1/api/user?pageSize=7 . Nos faltó pageNum pero por default esta con la pagina uno
+                5.1.4 Obtener 2 registros y en la pagina 2, http://localhost:5000/v1/api/user?pageSize=2&pageNum=2.
+        5.2 (request Ideas)
+                5.2.1 Primero tenemos q crear algunas ideas,  http://localhost:5000/v1/api/idea.
+                5.2.2 Obtenter 7 registros, http://localhost:5000/v1/api/idea?pageSize=7. Nos faltó pageNum pero por default esta con la pagina uno     
+                5.3.3 Obtener 3 registros y en la pagina 4, http://localhost:5000/v1/api/idea?pageSize=3&pageNum=4.
+Paso 7: Hacer Commit.
+        Nota: enviamos los cambios .env por ser un curso pero en un proyecto real no debe enviarse por seguridad, 
+                para esto lo ignoramos en nuestro .gitignore
+
+
+
+Comentarios:
+-Git: el comando Undo Last Commit te regresa el ultimo commit que hiciste.
+-Solo un pequeño dato que espero les sirva, se puede evitar escribir node_modules/.bin/sequelize utilizando el comando npx que es propio de npm.
+        Ej. npx sequelize [comando] o explicitamente "npx sequelize init"
+        npx se encarga de buscar por nosotros en la carpeta de node_modules.
+-Dot notation: car.seats -> "cloth"
+-Bracket notation: car["seats"] -> "cloth"

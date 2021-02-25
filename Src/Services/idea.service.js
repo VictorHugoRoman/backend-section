@@ -3,7 +3,8 @@
 const BaseService = require('./base.service');
 let _ideaRepository = null;
 
-class IdeaService extends BaseService {
+class IdeaService extends BaseService 
+{
     constructor({ IdeaRepository }) {
         super(IdeaRepository);//le pasamos el IdeaRepository al constructo padre de la clase q estamos creando 
         _ideaRepository = IdeaRepository;

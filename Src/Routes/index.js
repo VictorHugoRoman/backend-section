@@ -30,15 +30,15 @@ module.exports = function ({ HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes, 
         .use(compression());
     //algunps de estos middlewares se ejecutan antes de nuestra logica de rutas q estan abajo, otros durante y otros despues
 
-    //apiRoutes usara las rutas de home con las HomeRoutes de awilix, son las q configuramos en el container
+    //apiRoutes usara las rutas de home(home.routes.js), HomeRoutes es el objeto declarado en el container de awilix qu hace referencia a nuestro index.routes.js(index de la capa)
     apiRoutes.use("/home", HomeRoutes);
-    //apiRoutes usara las rutas de user con las userRoutes de awilix,son las q  configuramos en el container
+    //apiRoutes usara las rutas de user(user.routes.js), UserRoutes es el objeto declarado en el container de awilix qu hace referencia a nuestro index.routes.js(index de la capa)
     apiRoutes.use("/user", UserRoutes);
-    //apiRoutes usara las rutas de ideaome con las IdeaRoutes de awilix,son las q  configuramos en el container
+    //apiRoutes usara las rutas de idea(idea.routes.js), IdeaRoutes es el objeto declarado en el container de awilix qu hace referencia a nuestro index.routes.js(index de la capa)
     apiRoutes.use("/idea", IdeaRoutes);
-    //apiRoutes usara las rutas de comment con las CommentRoutes de awilix,son las q  configuramos en el container
+    //apiRoutes usara las rutas de comment(comment.routes.js), CommentRoutes es el objeto declarado en el container de awilix qu hace referencia a nuestro index.routes.js(index de la capa)
     apiRoutes.use("/comment", CommentRoutes);
-    //apiRoutes usara las rutas de auth con las AuthRoutes de awilix, son las q configuramos en el container
+    //apiRoutes usara las rutas de auth(auth.routes.js), AuthRoutes es el objeto declarado en el container de awilix qu hace referencia a nuestro index.routes.js(index de la capa)
     apiRoutes.use("/auth", AuthRoutes);
 
     //le pasamos al router todas las rutas de apiRoutes, y le mandamos un prefijo "param 1" para que todas las rutas o end point los muestre

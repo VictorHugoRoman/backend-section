@@ -7,8 +7,13 @@ class BaseRepository {
     async Get(id) {
         return await this.model.findById(id); //findById metodo de mongoose 
     }
-    async GetAll() {
-        return await this.model.find();
+    //pageSize=5, argumento mongoose nos sirve para ver el numero de elementos en una coleccion
+    //pageNum=1, argumento mongoose nos sirve para que pagina ver    
+    async GetAll(pageSize = 5, pageNum = 1) {
+        //skip(), nos dice cuantos elementos db saltar para comenzar a buscar
+        //limit(), limita la cantidad de elementos q d b retornar
+        const skips = pageSize * (pageNum - 1); //obtenemos la cantidad de paginas a saltar
+        return await this.model.find().skip(skips).limit(pageSize);
     }
     async Create(entity) {
         return await this.model.create(entity);

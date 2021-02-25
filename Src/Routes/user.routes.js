@@ -1,7 +1,7 @@
 //Aqui van las rutas que estaran disponible para el modelo User, usa la capa Controllers
 
 const { Router } = require("express"); //Usamos el Router de express
-const { AuthMiddleware } = require('../Middlewares')
+const { AuthMiddleware, ParseIntMiddleware } = require('../Middlewares')
 //#region 
 //function(){} es como el constructor en una clase, ya q las clases en javascritp son funciones
 //Es como si crearamos una clase anonima con un constructor de por medio
@@ -20,7 +20,7 @@ module.exports = function ({ UserController }) {
     //pero como a nuestro controller home le hicimos un bind en nuestro container.js el scope o contexto seguirá 
     //perteneciendo al controller en este caso UserController y asi podremos acceder a sus servicios o metodos.
     //#endregion
-    router.get("", [AuthMiddleware], UserController.GetAll); //si es un middleware podemos quitar los brackets.
+    router.get("", [AuthMiddleware, ParseIntMiddleware], UserController.GetAll); //si es un middleware podemos quitar los brackets.
     router.patch("/:userId", UserController.Update);
     router.delete("/:userId", UserController.Delete);
     return router;

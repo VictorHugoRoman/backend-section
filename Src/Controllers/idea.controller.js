@@ -11,7 +11,8 @@ class IdeaController {
         return res.send(idea);
     }
     async GetAll(req, res) {
-        const ideas = await _ideaService.GetAll();
+        const { pageSize, pageNum } = req.query; //obtenemos los valores ya  tipo number, recordar q hasta aqui  los middlewares se han ejecutado y por lo tanto el que hace el parseo tambien 
+        const ideas = await _ideaService.GetAll(pageSize, pageNum); //se lo mandamos al metodo getAll del base.repository
         return res.send(ideas);//res: response y con send dovolvemos los usuario, son metodos de express
     }
     async Create(req, res) {

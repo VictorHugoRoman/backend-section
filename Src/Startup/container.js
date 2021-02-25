@@ -21,10 +21,10 @@ const { HomeController, UserController, IdeaController, CommentController, AuthC
 
 //routes
 const { HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes, AuthRoutes } = require("../Routes/index.routes");
-const Routes = require('../Routes');//no destructuramos porque simplemente exportamos una funcion
+const Routes = require('../Routes');//no destructuramos porque simplemente exportamos una funcion, s l index.js de la carpeta Routes
 
 //models
-const { User, Comment, Idea } = require('../Models');//Desestructuración en Javascript.
+const { User, Idea, Comment } = require('../Models');//Desestructuración en Javascript.
 
 //repositories
 const { UserRepository, IdeaRepository, CommentRepository } = require('../Repositories');

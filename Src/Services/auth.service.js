@@ -21,7 +21,7 @@ class AuthService {
     }
     async SignIn(user) {
         const { username, password } = user;
-        const userExist = await _userService.GetUserByUserName(username); 
+        const userExist = await _userService.GetUserByUserName(username);
         if (!userExist) {
             const error = new Error();
             error.status = 404;

@@ -1,4 +1,4 @@
-//Aqui van los controllers disponibles para el modelo User,  usa la capa Services
+//Aqui van los controllers disponibles para el modelo User,  usa la capa Services. Hasta este punto en el proceso de peticion los middlewares ya han sido ejecutados
 let _userService = null;
 class UserController {
     constructor({ UserService }) {//por inyeccion de dependencia recibimos UserService de la capa servicios
@@ -10,7 +10,8 @@ class UserController {
         return res.send(user);
     }
     async GetAll(req, res) {
-        const users = await _userService.GetAll();
+        const { pageSize, pageNum } = req.query; //obtenemos los valores ya  tipo number, recordar q hasta aqui  los middlewares se han ejecutado y por lo tanto el que hace el parseo tambien 
+        const users = await _userService.GetAll(pageSize, pageNum); //se lo mandamos al metodo getAll del base.repository
         return res.send(users);//res: response y con send dovolvemos los usuario, son metodos de express
     }
     //usaremos un sign Up en vez de este metodo para crear un usuario
