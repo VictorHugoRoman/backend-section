@@ -1,0 +1,31 @@
+***Implementando Unit Testing***
+        Mide la calidad de nuestro codigo, en el curso la implementamos solo en la entidad de usuarios.
+        existen diferentes tipos de test como integrationTest, stressTest, unitTest. En el cursos implementamos unit test a los repositorios
+        y a los servicios para garantizarno q la informacion y el requirimiento como tal se está cumnpliendo, ya  q d esta
+        forma no es necesario probar todos los endPoint uno a uno ya q si hacemos los test de todas las entidades y pasan
+        podemos garantizar al 100% q nuestro codigo cumple con los requirimientos principales de la aplicacion.
+
+Paso 1: Checar si tenemos el paquete jest insatalado sino instalarlo como dependencia de desarrollo.
+Paso 1: Crear el archivo jest.config en la raiz del proyecto
+Paso 2: Crear un key con el nombre de CACHE_KEY o el q nosotros queramos, en nuestro archivo .env .
+        2.1 Crear la variable de entorno para el key la llamaremos CACHE_KEY, puede ser otro nombre.
+Paso 3: Crear un helper para la duracion de la cache.
+        Ir Helper y crear el archivo cache-time.helper.js y exponerlo en el index de la capa.
+Paso 4: Ir a la carpeta Middlewares, Crear el archivo cache.middleware.js y exponerlo en el index de la capa.
+Paso 4: Ejecutar el middleware cache en las rutas.
+        Ir a user.routes.js, exponerlo en la ruta GetAll.
+
+
+Paso 7: Hacer Commit.
+        Nota: enviamos los cambios .env por ser un curso pero en un proyecto real no debe enviarse por seguridad, 
+                para esto lo ignoramos en nuestro .gitignore
+
+
+
+Comentarios:
+-Git: el comando Undo Last Commit te regresa el ultimo commit que hiciste.
+-Solo un pequeño dato que espero les sirva, se puede evitar escribir node_modules/.bin/sequelize utilizando el comando npx que es propio de npm.
+        Ej. npx sequelize [comando] o explicitamente "npx sequelize init"
+        npx se encarga de buscar por nosotros en la carpeta de node_modules.
+-Dot notation: car.seats -> "cloth"
+-Bracket notation: car["seats"] -> "cloth"
