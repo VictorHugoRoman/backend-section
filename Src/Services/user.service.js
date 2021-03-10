@@ -6,7 +6,7 @@ let _userRepository = null;
 class UserService extends BaseService {
     constructor({ UserRepository }) {
         super(UserRepository);//le pasamos el UserRepository al constructo padre de la clase q estamos creando 
-        _userRepository = UserRepository;        
+        _userRepository = UserRepository;
     }
     async GetUserByUserName(userName) {
         return await _userRepository.GetUserByUserName(userName);

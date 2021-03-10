@@ -9,9 +9,8 @@ class UserRepository extends BaseRepository {
         super(User);//con super usamos el constructor de la clase padre
         _user = User;
     }
-
     async GetUserByUserName(userName) {
-        return await _user.findOne({name:userName});//findOne metodos de mongoose 
+        return await _user.findOne({ name: userName });//findOne metodos de mongoose 
     }
 }
 
