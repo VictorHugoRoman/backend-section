@@ -22,7 +22,7 @@ module.exports = function ({ IdeaController }) {
     //perteneciendo al controller en este caso UserController y asi podremos acceder a sus servicios o metodos.
     //#endregion
     router.get("", [ParseIntMiddleware], IdeaController.GetAll);
-    router.get("/:ideaId/all", IdeaController.GetUserIdeas);
+    router.get("/:userId/all", IdeaController.GetUserIdeas);
     router.patch("/:ideaId", AuthMiddleware, IdeaController.Update);
     router.delete("/:ideaId", AuthMiddleware, IdeaController.Delete);
     router.post("", IdeaController.Create);

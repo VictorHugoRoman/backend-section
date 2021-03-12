@@ -36,7 +36,7 @@ class CommentController {
     //Obtener comentarios por idea
     async GetIdeaComments(req, res) {
         const { ideaId } = req.params;
-        const comments = await _commentService.GetIdeasComments(ideaId);
+        const comments = await _commentService.GetIdeaComments(ideaId);
         return res.send(comments);
     }
     async CreateComment(req, res) {
@@ -44,7 +44,8 @@ class CommentController {
         //q s un json de la propiedad body q la cual enviamos en el request de tipo post en el objeto req
         const { body } = req;
         const { ideaId } = req.params;
-        const createdComment = await _commentService.CreateComment(body, ideaId);
+        const { id: userId } = req.user;//aqui el id q s la propiedad del user la pasa el valor a userId
+        const createdComment = await _commentService.CreateComment(body, ideaId, userId);
         return res.status(201).send(createdComment);
     }
 }

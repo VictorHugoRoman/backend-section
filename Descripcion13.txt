@@ -1,0 +1,28 @@
+***Toques Finales a nuestr API***
+        
+
+incidencia 1: El cache middleware no esta retornando registros modificados.
+incidencia 2: Validar el modelo de usuario para modificar siertos datos.
+incidencia 3: En upVote de ideas solo se guarda un bool true si se votó aqui podemos guardar un objeto al votar
+        y q s objeto contenga quien votó.
+incidencia 4: En downVote de ideas solo se guarda un bool true si se le dio un down al voto aqui podemos guardar un objeto
+        y q s objeto contenga quien hizo el down.
+incidencia 5: En las ideas, sale null el author si este fue borrado cuando se dio de alta una idea con él. validar para
+        que si se borra un author ligado q c borre la idea q esta relacionada.
+incidencia 6: En la ruta CreateComment aplicamos el middleware de autorizacion para que aparezcan los datos del usuario en el 
+        request body, y asi de esta manera ya no mandamos el id del usuario manualmente. para esto tenemos q agreagar el parametro en las
+        capas en el metodo CreateComment
+
+
+Paso 7: Hacer Commit.
+
+Nota: enviamos los cambios .env por ser un curso pero en un proyecto real no debe enviarse por seguridad, 
+        para esto lo ignoramos en nuestro .gitignore
+
+Comentarios:
+-Git: el comando Undo Last Commit te regresa el ultimo commit que hiciste.
+-Solo un pequeño dato que espero les sirva, se puede evitar escribir node_modules/.bin/sequelize utilizando el comando npx que es propio de npm.
+        Ej. npx sequelize [comando] o explicitamente "npx sequelize init"
+        npx se encarga de buscar por nosotros en la carpeta de node_modules.
+-Dot notation: car.seats -> "cloth"
+-Bracket notation: car["seats"] -> "cloth"

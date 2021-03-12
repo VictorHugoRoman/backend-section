@@ -16,7 +16,7 @@ module.exports = function ({ UserController }) {
     //get() corresponde a una peticion http de tipo get
     //Param 1: ruta URI q recibe un parametros. Param 2: controlador o metodo del controlador q resolverá la ruta pasada en el param 1
     //#endregion
-    router.get("/:userId", AuthMiddleware,UserController.Get);//UserController.get es la funcion q express ejecutara por ello la pasamos de esa manera y no UserController.get() porque asi se ejecutaria la funcion
+    router.get("/:userId", UserController.Get);//UserController.get es la funcion q express ejecutara por ello la pasamos de esa manera y no UserController.get() porque asi se ejecutaria la funcion
     //#region 
     //Normalmente cuando express ejecuta el get o cualquier otra funcion del Router le pasa su scope a la funcion
     //pero como a nuestro controller home le hicimos un bind en nuestro container.js el scope o contexto seguirá 

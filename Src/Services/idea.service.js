@@ -27,7 +27,7 @@ class IdeaService extends BaseService
             error.message = "author must be sent";
             throw error;//este error lo cachara el middleware error.middleware.js
         }
-        const idea = await _ideaRepository.get(ideaId);
+        const idea = await _ideaRepository.Get(ideaId);
         if (!idea) { //validacion si no se encontró
             const error = new Error();
             error.status = 404;
@@ -35,7 +35,7 @@ class IdeaService extends BaseService
             throw error;
         }
         idea.upvotes.push(true);//upvotes es de tipo array 
-        return await _ideaRepository.update(ideaId, { upvotes: idea.upvotes });//como _ideaRepository es mi modelo y este es de mongo usamos el metodo update de mongo
+        return await _ideaRepository.Update(ideaId, { upvotes: idea.upvotes });//como _ideaRepository es mi modelo y este es de mongo usamos el metodo update de mongo
     }
     //metodo para votar negativamente
     async DownVoteIdea(ideaId) {
@@ -45,7 +45,7 @@ class IdeaService extends BaseService
             error.message = "author must be sent";
             throw error;//este error lo cachara el middleware error.middleware.js
         }
-        const idea = await _ideaRepository.get(ideaId);
+        const idea = await _ideaRepository.Get(ideaId);
         if (!idea) { //validacion si no se encontró
             const error = new Error();
             error.status = 404;
@@ -53,7 +53,7 @@ class IdeaService extends BaseService
             throw error;
         }
         idea.downvotes.push(true);//downvotes es de tipo array 
-        return await _ideaRepository.update(ideaId, { downvotes: idea.downvotes });//como _ideaRepository es mi modelo y este es de mongo usamos el metodo update de mongo
+        return await _ideaRepository.Update(ideaId, { downvotes: idea.downvotes });//como _ideaRepository es mi modelo y este es de mongo usamos el metodo update de mongo
     }
 }
 

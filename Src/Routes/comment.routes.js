@@ -1,6 +1,7 @@
 //Aqui van las rutas que estaran disponible para el modelo Comment,  usa la capa Controllers
 
 const { Router } = require("express"); //Usamos el Router de express
+const {AuthMiddleware} = require('../Middlewares')
 
 //#region 
 //function(){} es como el constructor en una clase, ya q las clases en javascritp son funciones
@@ -21,8 +22,8 @@ module.exports = function ({ CommentController }) {
     //perteneciendo al controller en este caso CommentController y asi podremos acceder a sus servicios o metodos.
     //#endregion
     router.get("/:ideaId", CommentController.GetIdeaComments);    
-    router.post("/:ideaId", CommentController.CreateComment);
-    router.patch("/:commentId", CommentController.Update);
-    router.delete("/:commentId", CommentController.Delete);    
+    router.post("/:ideaId", AuthMiddleware, CommentController.CreateComment);
+    router.patch("/:commentId", AuthMiddleware, CommentController.Update);
+    router.delete("/:commentId", AuthMiddleware, CommentController.Delete);    
     return router;
 }

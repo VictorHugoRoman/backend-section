@@ -30,7 +30,7 @@ UserSchema.pre('save', async function (next) {
         return next();//metodo next de mongoose, finaliza esta funcion y pasa a las sig. implementaciones, es como un continue
     const salt = genSaltSync(10);//fragmento aleatorio que se usará para generar el hash asociado a la password
     const hashedPassword = hashSync(user.password, salt); //generamos el has del password
-    user.password = hashedPassword;
+    user.password = hashedPassword;// hashedPassword;
     next();//metodo next de mongoose, finaliza esta funcion y pasa a las sig. implementaciones, es como un continue
 });
 //importamos el modelo, lo llamaremos con el nombre de "user"
