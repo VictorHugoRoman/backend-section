@@ -1,0 +1,57 @@
+***Implementando Swagger***
+        Nos sirve para generar documentaciones de nuestras apis, swagger es un proyecto open source 
+        y nos ayuda a documentar la api de una manera sencilla para otros desarrolladores.
+
+Paso 1: Checar si tenemos el paquete swagger-ui-express insatalado sino instalarlo como dependencia.        
+Paso 2: Crear la carpeta Swagger dentro de Config.
+        1.1: Meter los archivos swaggerDEV.json, swaggerPROD.json.
+                En .net core y Nest.js swagger genera la documentacion de forma automatica, en node.js tambien se puede 
+                pero en este caso aprenderemos lo basico.
+Paso 3: Leer el Funcionamiento de las sig. Propiedades q pertenecen al swaggerDEV.json.
+        - "swagger": "2.0.0" es la version de nuestro swagger OpenApi.
+                La especificación OpenAPI es una especificación abierta impulsada por la comunidad dentro de la Iniciativa OpenAPI , La Especificación OpenAPI (OAS) define una descripción de interfaz estándar,
+                independiente del lenguaje de programación para las API HTTP.
+        - "info": {} contiene la informacion para la documentacion
+        -  "host": "localhost:5000" el host donde esta corriendo nuestra api, como estamos en swaggerDEV aparece el localhost
+        - "basePath": "/v1/api", nuestra ruta base configurada en el router express (Routes > index.js).
+        - "tags": [{"name": "User","description": "Everything about users"}] aqui van las etiquetas de las entidades con las q estamos trabajando, en este caso solo usamos la del modelo User
+        - "schemes": ["http","https"] protocolos n los q correra la api, en este caso http en conexiones remota y https en produccion.
+        - "paths": {"/user":{get:{}},"/user/{id}":{get:{},patch:{}, delete:{}}} paths representa nuestros endpoints en este caso tenemos "/user" y "/user/{id}" cada endpoint  
+                contiene los verbos q l vamos a aplicar get patch delete, etc. cada verbos de cada endpoint contiene su propia configuracion su tags, sus parametros, sus repuestas,
+        - "$ref": "#/definitions/User" esta propiedad la contiene los responses de los vervbos de los endpoints hacen refrencia a la sig. propiedad.
+        - "definitions": {"User": {},"ApiResponse":{}} esta propiedad contiene las propiedades de la entidad o modelo q vamos a utilizar en este caso contiene el 
+                de user y sus propiedades.
+        -  "parameters": [{"name": "id","in": "path"}, {"name": "Authorization", "in": "header"} esta propiedad se encuentra en los verbos htttp donde se requieran parametros
+                ya sea por ruta o por header, en este caso los podemos ver n l path "/user/{id}" y en sus verbos patch y delete. si vemos "parameters" tiene dos objetos uno 
+                con nombre "id" y el otro "Authorization" y mediante la  propiedad "in" sabemos en donde c d b d encontrar dicho parametro, en uno nos dice q l valor estará 
+                en la ruta y el otro en la cabecera de la peticion.
+Paso 4: Crear una variable de entorno, SWAGGER_DOC. contendra el valor del nombre del archivo de configuracion de swagger  si sera para desarrollo o produccion.
+        en este caso metimos el nombre de swaggerDEV para desarrollo.
+        4.1 En el archivo index.js de nuestras configuraciones exponemos la variable de entorno creada, creamos la propiedad SWAGGER_PATH. 
+                esta propiedad contendra la ruta de las configuraciones de los archivos swagger concatenando el valor de la variable de entorno q contiene el nombre de dicho archivo de configuracion.
+Paso 5: Implementar swagger en las rutas de la api. ir al index de Routes.
+Paso 6: Ejecutar la documentacion de usuario q acabamos de crear.
+        6.1 En l Router > usuario configurar la ruta get all quitar los sig middlewares: cache de usuario, authorizacion, esto solo para probar el swagger con este metodo,
+                una vez terminado poner la ruta como estaba configurada.
+        6.2 http://localhost:5000/api-docs/
+                d b d aparecer la interfaz de swagger con la info q l pasamos en el swaggerDEV.json, es importante escarbar los verbos q aparecen ya q salen
+                conforme a la configuracion q le metimos en el archivo swaggerDEV.json
+Paso 7: Meterle a las rutas de los usuarios, ideas, etc. el middleware de authorizacion en las q c requiera.
+Paso 8: Esta documentacion swaggerDEV.json es de pruebas, pero se le puede meter mas info como los diferentes de respuestas q puede tener cada verbo http, los mensajer de error, los
+        parametros q son requeridos, q son opcionales.
+Paso 9: Hacer Commit.
+
+
+Nota: enviamos los cambios .env por ser un curso pero en un proyecto real no debe enviarse por seguridad, esto lo ignoramos en nuestro .gitignore
+Comentarios:
+-Test Suites: son las pruebas en si estan en el metodo describe() de jest
+-Tests: son lo metodos q contienen las pruebas lo que esta dentro del metodo describe()
+-Mock: Los mocks son  objetos preprogramados con expectativas que forman una especificación de las llamadas que se espera recibir.
+        Un mock va más allá que un stub, un mock te indica algo como «espero que llames a esté método y que si lo haces con un 
+        específico argumento de entrada, obtendrás una respuesta concreta».
+-Git: el comando Undo Last Commit te regresa el ultimo commit que hiciste.
+-Solo un pequeño dato que espero les sirva, se puede evitar escribir node_modules/.bin/sequelize utilizando el comando npx que es propio de npm.
+        Ej. npx sequelize [comando] o explicitamente "npx sequelize init"
+        npx se encarga de buscar por nosotros en la carpeta de node_modules.
+-Dot notation: car.seats -> "cloth"
+-Bracket notation: car["seats"] -> "cloth"

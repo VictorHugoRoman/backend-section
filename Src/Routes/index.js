@@ -13,6 +13,9 @@ const { NotFoundMiddleware, ErrorMiddleware } = require('../Middlewares'); //mid
 //const notFoundMiddleware = require('../Middlewares/not-found.middleware');
 //const errorMiddleware = require('../Middlewares/error.middleware');
 //#endregion 
+const swaggerUI = require('swagger-ui-express');
+const {SWAGGER_PATH} = require('../Config');//obtenemos la ruta del documento d config de swagger
+const swaggerDocument = require(SWAGGER_PATH);//obtenemos l documento
 
 //como estamos usando awilix exportamos en una funcion las rutas necesarias o las q queramos.
 //ver funcionamiento de "function ({}){ }" en  home.route.js
@@ -43,7 +46,9 @@ module.exports = function ({ HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes, 
 
     //le pasamos al router todas las rutas de apiRoutes, y le mandamos un prefijo "param 1" para que todas las rutas o end point los muestre
     router.use("/v1/api", apiRoutes);
-
+    //Exponiendo la documentacion de api con Swagger
+    router.use("/api-docs/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+    
     router.use(NotFoundMiddleware);
     router.use(ErrorMiddleware);
 

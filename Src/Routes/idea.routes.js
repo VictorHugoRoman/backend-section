@@ -2,6 +2,7 @@
 
 const { Router } = require("express"); //Usamos el Router de express
 const { ParseIntMiddleware } = require('../Middlewares')
+const { AuthMiddleware } = require('../Middlewares');
 //#region 
 //function(){} es como el constructor en una clase, ya q las clases en javascritp son funciones
 //Es como si crearamos una clase anonima con un constructor de por medio
@@ -22,10 +23,10 @@ module.exports = function ({ IdeaController }) {
     //#endregion
     router.get("", [ParseIntMiddleware], IdeaController.GetAll);
     router.get("/:ideaId/all", IdeaController.GetUserIdeas);
-    router.patch("/:ideaId", IdeaController.Update);
-    router.delete("/:ideaId", IdeaController.Delete);
+    router.patch("/:ideaId", AuthMiddleware, IdeaController.Update);
+    router.delete("/:ideaId", AuthMiddleware, IdeaController.Delete);
     router.post("", IdeaController.Create);
-    router.post("/:ideaId/upvote", IdeaController.UpVoteIdea);
-    router.post("/:ideaId/downvote", IdeaController.DownVoteIdea);
+    router.post("/:ideaId/upvote", AuthMiddleware, IdeaController.UpVoteIdea);
+    router.post("/:ideaId/downvote", AuthMiddleware, IdeaController.DownVoteIdea);
     return router;
 }

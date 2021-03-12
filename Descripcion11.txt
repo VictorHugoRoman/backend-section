@@ -1,4 +1,4 @@
-***Implementando Unit Testing***
+***Implementando Unit Testing con jest.js***
         Mide la calidad de nuestro codigo, en el curso la implementamos solo en la entidad de usuarios.
         existen diferentes tipos de test como integrationTest, stressTest, unitTest. En el cursos implementamos unit test a los repositorios
         y a los servicios para garantizarno q la informacion y el requirimiento como tal se está cumnpliendo, ya  q d esta
