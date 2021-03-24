@@ -1,0 +1,58 @@
+***Dockerizar la api***
+        Esta implementacion hacerla una vez tomada la seccion 12, donde hablamos de Docker.
+
+Paso 1: Crear el archivo Dockerfile.
+        FROM node   --> Jalamos la imagen de node
+        COPY  . /var/www  --> (.) nuestro path actual, (/var/www) path del contenedor. decimos q copiamos todo los q esta en el path actual a la ruta wwww
+        WORKDIR /var/www  --> path default para trabajar s como una variable de entorno de windows, es decir los comando de node q requieran un path este sera el default
+        RUN npm install --> Docker corre el comando de node npm install, aqui hace usO del WORKDIR
+        EXPOSE 5000 --> Puerto donde estara expuesta la aplicacion
+        ENTRYPOINT ["npm", "start"] --> Docker ejecuta este comando una vez esté todo corriendo, el valor del comando es el array de comandos.
+Paso 2: Vamos a ejecutar la aplicacion en ambiente de produccion, siendo asi, el archivo .env no sera d utilidad para docker.
+Paso 3: Dockerizar una BD Mongo para conectarla a nuestra api.
+                Esto es un tipo de infraestructura con containers, q s una buena practica. Ya q tendremos a nuestra api en un container y en otro container la BD.                
+        3.1 Usaremos Docker compose, este nos permite crear redes entre los containers, conectarse para compartir recursos.
+                Un docker-compose.yml es un archivo de configuración para docker-compose.
+                permite desplegar, combinar y configurar múltiples contenedores acoplables al mismo tiempo. la "regla" de Docker es subcontratar cada proceso a un contenedor propio.
+                por ejemplo, un simple web docker-compose. necesita un servidor, una base de datos y php. para que pueda configurar tres contenedores docker con apache2, php y mysql.
+                la ventaja de docker-compose es la fácil configuración. no es necesario escribir una gran cantidad de parámetros en el bash. su puede predefinirlo en el docker-compose.yml.
+        3.2 Crear el archivo docker-compose.yml.  en los archivo yml los tabs son como las llaves en json, es decir, un nodo va a contener todo lo q esta debajo con tab.
+                version: "3"  --> Version de Docker Compose
+                        services:  --> define los servicios q vamos a utilizar q serian nuestro container y su BD Mongo, q c van a relacionar entre si.
+                          api_ideas_shared:  --> servicio 1 para nuestra api, lo nombramos api_ideas_shared
+                            build: .  --> propiedad build q indica q archivo va a buildear(compilar) dicho container o bien q Dockerfile va a crear la imagen de nuestro container
+                                          con el . hacemos referencia a nuestro Dockerfile q esta en raiz.
+                            depends_on: --> aqui van las dependencias, n st caso ponemos el servicio 2 q s mongo. Entonces  servicio 1 dependerá de servicio 2 
+                                            con esto decimos q para q l servicio 1 se construya primero c tiene q construir el servicio 2.
+                              - mongo  --> dependencia mogo, en yml con - y el tab hacemos la notacion q s hija de depends_on
+                            environment:  --> aqui van las variables de entorno, en nuestro caso ponemos las q ocuparia nuestra api, q son las q estan en el archivo .env
+                              - PORT=5000  --> Variable PORT, en yml con - y el tab hacemos la notacion q s hija de environment. Lo mismo para las demás.
+                              - MONGO_URI=mongodb://mongo:27017/test  --> var MONGO_URI s la cadena de conexion para nuestra api. Cabe destacar que la BD no va a 
+                                                                          poder ser accesible mediante nuestro host(PC) sino q solo estara expuesta para el container de nuestra api,
+                                                                          quiere decir q solo estará en la red de Docker.                                                                          
+                                - APPLICATION_NAME=Share Your Idea
+                              - JWT_SECRET=vfmhg45sfsfdlskfs343534!!! --> key para los tokens en auth middlweware, hay caracteres q provocan problemas de interpolacion
+                                                                           a la hora de correr nuestro archivo docker-compose
+                              - CACHE_KEY=myStrongPassword --> key para la cache middlweware
+                              - SWAGGER_DOC=swaggerPROD --> cambiamos el archivo de desarrollo swaggerDEV por el de produccion swaggerPROD
+                            ports: --> aqui van los puertos para el enlace o mapeo de nuestra api con el host o nuestro computador
+                              - "5000:5000" --> PuertoMiPc : PuertoContainer
+                          mongo: --> servicio 2 para nuestra BD, lo nombramos mongo. En esta caso lo construimos con una imagen de mongo y no con un Dockerfile
+                            image: mongo --> imagen para el servicio en este caso uso la de mongo descargada en Docker Hubo
+Paso 4: Ejecutar docker-compose.yml 
+        En la terminal ejecutamos el comando o el programa "docker-compose up --build"
+        "docker-compose" :  comando o programa
+        "up" : parametro para el programa, le decimos q mediante con nuestro docker-compose va a levantar los servicios q tengamos definidos.
+        "--build" : compilacion, con este hacemos q c construyan los containers cada vez q ejecutamos el comando completo "docker-compose up --build"
+                y no utilice los q estan en cache y ya han sido creados anteriormente.
+        Puede tardar ya q instala todas las dependencias de nuestro package.json de nodejs
+
+Comentarios:
+***Entendiendo la cadena de conexion mongodb://mongo:27017/test
+        "mongodb" : db es el subprotocolo
+        "//mongo": es el nombre del servicio 2 de nuestro docker compose, no pusimos localhost porque intentariamos conectarno al localhost de nuestro host(PC)
+                   entonces de esta manera nos conectamos a la ip q tendrá el servicio 2 "mongo" al momento d q c creen nuestros containers y c cree la red interna 
+                   para nuestros servicios, entonces independientemente de la ip q c l asigne al servicio 2 "mongo" no nos afectará ya q usamos el nombre del serivicio.
+        ":27017": Puerto para la BD, n l servicio 2 de nuestro docker compose no fué necesario meter el puerto ya q mongo al crearse el servicio c expone con este puerto
+                  internamente y con ello aprovechamos para no exponer hacia fuera la bd, ya q si metemos el puerto en el servicio 2 se expondria.                  
+        "/test": nombre de la BD.

@@ -1,6 +1,6 @@
 //Archivo root principal para el arranque de la api
 
-//Obtenemos todo lo q esta en el archivo container
+//Obtenemos todas las dependencias, lo q esta en el archivo container
 const container = require('./Src/Startup/container');
 //obtenermos la BD  a traves del container q configuramos en container.js
 const server = container.resolve("app");  //app hace referencia al register q hicimos en el container.js, contiene la clase Server del index de la capa StartUp
