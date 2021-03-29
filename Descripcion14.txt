@@ -39,14 +39,23 @@ Paso 3: Dockerizar una BD Mongo para conectarla a nuestra api.
                               - "5000:5000" --> PuertoMiPc : PuertoContainer
                           mongo: --> servicio 2 para nuestra BD, lo nombramos mongo. En esta caso lo construimos con una imagen de mongo y no con un Dockerfile
                             image: mongo --> imagen para el servicio en este caso uso la de mongo descargada en Docker Hubo
-Paso 4: Ejecutar docker-compose.yml 
+Paso 4: Ejecutar docker-compose.yml q contiene el servicio de node(nuestra api rest) y el servicio de mongodb
         En la terminal ejecutamos el comando o el programa "docker-compose up --build"
         "docker-compose" :  comando o programa
         "up" : parametro para el programa, le decimos q mediante con nuestro docker-compose va a levantar los servicios q tengamos definidos.
         "--build" : compilacion, con este hacemos q c construyan los containers cada vez q ejecutamos el comando completo "docker-compose up --build"
                 y no utilice los q estan en cache y ya han sido creados anteriormente.
         Puede tardar ya q instala todas las dependencias de nuestro package.json de nodejs
-
+Paso 5: Resultado del comando: Primero dbrá crear la red de nuestro docker-compose, despues entra en el service "api", ejecuta build(compila) nuestro Dockerfile
+        este dockerfile lo referenciamos con el ".", Ahore entramos a DockerFile,siguiendo el proceso de dockercompose c ejecuta desde el comando FROM 
+        hasta el comando RUN ya que hasta este comando tiene todo lo necesario para trabajar con la imagen el resto de los comandos c ejecutan despues de que c 
+        levante la imagen de mongo ya q n nuestro docker-compose pusimos como dependencia al contenedor de mongo, es decir que nuestra api rest se va a ejecutar
+        cuando el contenedor de mongo este listo, entonces c  ejecutarian los comandos EXPOSE y ENTRYPOINT de nuestro Dockerfile.
+        En VSCode en la herramienta Docker se puede ver la red creada "backend-section" en este caso, lleva el nombre de nuestra carpeta root.
+Paso 6: Hacer peticiones, primero intentar loguearse con un usuario q teniamos localmente, dbera salir el mensaje "usuario inexistente" ya q s una BD nueva,
+        dar de alta algun usuario.
+        http://localhost:5000/v1/api/auth/signin 
+        http://localhost:5000/v1/api/auth/signup
 Comentarios:
 ***Entendiendo la cadena de conexion mongodb://mongo:27017/test
         "mongodb" : db es el subprotocolo
