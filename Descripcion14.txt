@@ -17,7 +17,8 @@ Paso 3: Dockerizar una BD Mongo para conectarla a nuestra api.
                 por ejemplo, un simple web docker-compose. necesita un servidor, una base de datos y php. para que pueda configurar tres contenedores docker con apache2, php y mysql.
                 la ventaja de docker-compose es la fácil configuración. no es necesario escribir una gran cantidad de parámetros en el bash. su puede predefinirlo en el docker-compose.yml.
         3.2 Crear el archivo docker-compose.yml.  en los archivo yml los tabs son como las llaves en json, es decir, un nodo va a contener todo lo q esta debajo con tab.
-                version: "3"  --> Version de Docker Compose
+	    Docker Compose, por defecto, busca instrucciones en el archivo docker-compose.yml.
+                version: "3"  --> Version de Docker Compose, ver final de archivo para mas descripcion.
                         services:  --> define los servicios q vamos a utilizar q serian nuestro container y su BD Mongo, q c van a relacionar entre si.
                           api_ideas_shared:  --> servicio 1 para nuestra api, lo nombramos api_ideas_shared
                             build: .  --> propiedad build q indica q archivo va a buildear(compilar) dicho container o bien q Dockerfile va a crear la imagen de nuestro container
@@ -57,6 +58,8 @@ Paso 6: Hacer peticiones, primero intentar loguearse con un usuario q teniamos l
         http://localhost:5000/v1/api/auth/signin 
         http://localhost:5000/v1/api/auth/signup
 Comentarios:
+Docker-compose campo: version: "3": Los archivos docker-compose.yml son versionados, lo que significa que es muy importante indicar la version de las instrucciones que queremos darle. A medida de que Docker evoluciona, 
+	habrá nuevas versiones, pero de todos modos, siempre hay compatabilidad hacia atras, al indicar la version de la receta(nombrado asi por la caracteristica del archivo al tener puras instrucciones).
 ***Entendiendo la cadena de conexion mongodb://mongo:27017/test
         "mongodb" : db es el subprotocolo
         "//mongo": es el nombre del servicio 2 de nuestro docker compose, no pusimos localhost porque intentariamos conectarno al localhost de nuestro host(PC)
