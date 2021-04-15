@@ -1,9 +1,9 @@
 //##### Tests para los metodos del repositorio User ###
 
-const { UserRepository } = require("../../../src/repositories"); //nuestro user.repository
+const { UserRepository } = require("../../../Src/Repositories"); //nuestro user.repository
 const mockingoose = require("mockingoose").default; //paquete q instalamos como dependencia de desarrollo, nos sirve para hacer mocking de mongoose
-const { User } = require("../../../src/models"); //nuestro user.model
-let { UserModelMock: { user, users } } = require("../../mocks"); //informacion mock de usuarios
+const { User } = require("../../../Src/Models"); //nuestro user.model
+let { UserModelMock: { user, users } } = require("../../Mocks"); //informacion mock de usuarios
 
 //Empezando nuestros tests, esta es sintaxis de jest
 //Vamos a crear una suite de teste en esta caso de repository user, viene siendo como un grupo q va a almacenar varios test para tenerlo de forma organizada

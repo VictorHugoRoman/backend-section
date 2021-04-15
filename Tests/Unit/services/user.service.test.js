@@ -1,8 +1,8 @@
 //##### Tests para los metodos de los servicios User ###
 
-const { UserService } = require("../../../src/services");
-const { UserRepositoryMock } = require("../../mocks"); //repositorio q deberia contener todas las funciones del user repository y del base repository, pero en este se crean de tipo jest.fn
-const { UserModelMock: { user, users } } = require("../../mocks");//informacion mock de usuarios
+const { UserService } = require("../../../Src/Services");
+const { UserRepositoryMock } = require("../../Mocks"); //repositorio q deberia contener todas las funciones del user repository y del base repository, pero en este se crean de tipo jest.fn
+const { UserModelMock: { user, users } } = require("../../Mocks");//informacion mock de usuarios
 
 describe("User Service Tests", () => {
   //beforeEach() is run before each test in a describe
