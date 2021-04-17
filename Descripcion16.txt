@@ -1,0 +1,44 @@
+**Implementado CI/CD en nuesta app**
+    Pasar las variables de entorno al proveedor de la nube donde haremos el deploy,en nuestro caso Heroku. 
+    ver seccion 14 para conceptos
+
+Paso 1: Copiar las propiedades y sus valores del archivo ".env" a la plataforma de heroku será para el ambiente de produccion, el puerto (PORT) no copiar.
+    1.1 Ir a Heroku.com y abrir nuestro proyecto "compartetusideas-nodejs" en mi caso.
+    1.2 Entrar al apartado "Settings"
+        1.2.1 Buscar al apartado "Config Vars", click al boton "Reveal Config Vars"
+        1.2.3 Ingresar los valores en KEY, VALUE y con el boton "ADD" añadiremos la variable de entorno.
+        1.2.4 Cambiar los valores q c ocuparan en produccion por ejemplo "swaggerDEV" cambiarlo a "swaggerPROD".
+        1.2.5 Con esto podemos borrar nuestro archivo .env .
+Paso 2: Otorgar permisos a travis para acceder a nuestro repositorio "backend-section" de github, ya q este c encargará
+        de hacer los commits automaticos, ver sig. pasos
+        2.1 sitio travis.com
+            2.1.1 Ir a travis.com, n la parte superior derecha esta l "boton de usuario" seleccionar opcion "settings".
+            2.1.2 Seccion "Repositories", seleccionar boton "Manage repositories on github", abrira una ventana para dar permisos para acceder a nuestros repositorios.
+            2.1.3 Seccion "Repository access" contiene las opciones "All repositories" y "Only select repositories". La primera s para dar permiso de acceso a todos 
+                nuestros repositorios, la segunda es para seleccionar al repositorio q queremos dar permiso de acceso.
+            2.1.4 boton "save" para guardar la configuracion.
+        2.2 sitio travis.org
+            2.2.1 Ir a travis.org n la parte izquierda "My repositories" click n l boton "+".
+            2.2.2 En la seccion "Legacy Services Integration" apareceran los repositorios publico de nuestra cuenta de github, en nuestro
+                    caso seleccionamos "backend-section" con el siguiente boton marcarlo con una palomita.
+        2.3 Con esta configuracion cada vez q hagamos commit github mandara informara a travis y este ejecutara el archivo travis q acabamos de configurar
+            y comenzara a ejecutar las instrucciones q indicamos en nuestro pipeline(.travis.yml)
+Paso 3: Agregar el repositorio de Heroku a nuestra aplicacion, Ir al dashboard Heroku.com
+    3.1 Seleccionamos nuestra aplicacion "compartetusideas-nodejs"
+    3.2 Entrar al apartado "Deploy"
+        3.2.1 Buscar la seccion "Existing Git repository" y copiamos el comando. heroku git:remote -a compartetusideas-nodejs 
+            Lo q hace este comando es agregar el repositorio a nuestro proyecto o app q creamos en heroku, y si hacemos un push a este remote (rama master), automaticamente heroku
+            va a buildear nuestro proyecto y lo va a desplegar en su plataforma, pero en nuestro caso lo haremos a traves de github con travis.
+    3.3 Con los pasos de la Descripcion 15 y hasta aqui ya tenemos configurado nuestra app Restful con travis y heroku lo q quiere decir q cada vez q hagamos un push a la rama
+        master de nuestro repositorio en github travis c encargará de hacer la integracion y ejecutar el deploy con heroku.
+Paso 4: Crear o modificar el README file en nuestro proyecto:
+    4.1 Crear el archivo README.md en la raiz del proyecto.
+    4.2 Copiar el markdown de travis.
+        4.2.1 Ir al repositorio en travis.com o .org (https://travis-ci.com/dashboard), seleccionamos el repositorio (backend-section).
+        4.2.2 A lado derecho del breadcrumb esta el boton "logo de git" y el boton "build|estado" donde estado s el estado q pone travis al compilar.
+            seleccionamos el boton "build|estado", levantará un modal.
+        4.2.3 En el modal seleccionamos las opciones de "FORMAT" y seleccionamos "Markdown" y copiamos lo q esta en "RESULT".
+            Con esta opcion nos aparecera un boton con el estado de las compilaciones de travis en nuestro repositorio de github, si seleccionamos el boton
+            nos mandara al repositorio de travis.
+Paso 5: Ejecutar Continous Integration CI con travis y gitub.
+    5.1 Ejecutar los siguientes comandos: git add .; git commit -m "[ADD] Travis CI implemented"; git push origin master;
